@@ -1,4 +1,4 @@
-# FORMERJS Form Validator
+# FORMER.JS Form Validator (Coming Soon)
 A simple, flexible, and easy-to-use form validator for javascript
 
 ### Install
