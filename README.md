@@ -69,7 +69,7 @@ former.validate([formObject], [callback])
 ## Example
 
 ```js
-const former = require('former.js');
+const former = require('@devardha/former.js');
 
 const validEmail = former.check.string('test@email.com', { type: 'email' });
 console.log(validEmail) // it will return the email
@@ -80,7 +80,7 @@ console.log(invalidEmail) // it will return a string of invalid email code (EMAI
 
 Full form validation example
 ```js
-const former = require('former.js');
+const former = require('@devardha/former.js');
 
 // form data must be an object
 const formData = {
