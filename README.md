@@ -1,10 +1,10 @@
-# FORMER.JS Form Validator (Coming Soon)
+# FORMER.JS Form Validator
 Former.js is a simple, flexible, and easy-to-use form validator for javascript.
 
 ## Getting started
 ### Installation
 ```bash
-$ npm install former.js
+$ npm install @devardha/former.js
 ```
 
 ### Usage
