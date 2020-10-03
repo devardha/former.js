@@ -1,5 +1,5 @@
 # FORMER.JS Form Validator
-[![npm version](https://badge.fury.io/js/%40devardha%2Fformer.js.svg)](https://badge.fury.io/js/%40devardha%2Fformer.js) [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/devardha/former.js/issues) ![npm (scoped)](https://img.shields.io/npm/v/@devardha/former.js)
 
 Former.js is a simple, flexible, and easy-to-use form validator for javascript.
 
