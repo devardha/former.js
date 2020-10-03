@@ -6,9 +6,10 @@ const {
     emailError,
     minError,
     maxError,
-    trimError,
+    whitespaceError,
     numberError,
     booleanError,
+    imageError,
 } = errorMessage;
 
 const check = {
@@ -20,15 +21,27 @@ const check = {
         if (typeof options !== 'object') throw new Error('Options argument must be an object');
 
         const {
-            max, min, trim, type,
+            max, min, whitespace, type,
         } = options;
 
-        // if Email
+        // Type Checker
         if (typeof type !== 'undefined') {
             if (typeof type !== 'string') throw new Error("'type' options must be a string");
+
+            // if Email
             if (type === 'email') {
                 if (validateEmail(text)) return text;
                 return emailError;
+            }
+
+            // If Image
+            if (type === 'image') {
+                const exp = /\w+\.(jpg|jpeg|gif|png|tiff|bmp|svg)$/gi;
+
+                if (text.match(exp)) {
+                    return text;
+                }
+                return imageError;
             }
         }
 
@@ -36,7 +49,7 @@ const check = {
         if (
             typeof max !== 'undefined'
             && typeof min === 'undefined'
-            && typeof trim === 'undefined') {
+            && typeof whitespace === 'undefined') {
             if (text.length > max) return maxError;
 
             return text;
@@ -46,54 +59,58 @@ const check = {
         if (
             typeof min !== 'undefined'
             && typeof max === 'undefined'
-            && typeof trim === 'undefined'
+            && typeof whitespace === 'undefined'
         ) {
             if (text.length < min) return minError;
             return text;
         }
 
-        // If Trim
+        // If Whitespace
         if (
-            typeof trim !== 'undefined'
+            typeof whitespace !== 'undefined'
             && typeof min === 'undefined'
             && typeof max === 'undefined') {
-            const exp = /\s/g;
-            if (exp.test(text)) return trimError;
+            if (whitespace === false) {
+                const exp = /\s/g;
+                if (exp.test(text)) return whitespaceError;
 
-            return text;
+                return text;
+            }
         }
 
-        // If Max, Trim
+        // If Max, Whitespace
         if (
             typeof max !== 'undefined'
-            && typeof trim !== 'undefined'
+            && typeof whitespace !== 'undefined'
             && typeof min === 'undefined') {
             if (text.length > max) return maxError;
+            if (whitespace === false) {
+                const exp = /\s/g;
+                if (exp.test(text)) return whitespaceError;
 
-            const exp = /\s/g;
-            if (exp.test(text)) return trimError;
-
-            return text;
+                return text;
+            }
         }
 
-        // If Min, Trim
+        // If Min, Whitespace
         if (
             typeof min !== 'undefined'
-            && typeof trim !== 'undefined'
+            && typeof whitespace !== 'undefined'
             && typeof max === 'undefined') {
             if (text.length < min) return minError;
+            if (whitespace === false) {
+                const exp = /\s/g;
+                if (exp.test(text)) return whitespaceError;
 
-            const exp = /\s/g;
-            if (exp.test(text)) return trimError;
-
-            return text;
+                return text;
+            }
         }
 
         // If Min, Max
         if (
             typeof min !== 'undefined'
             && typeof max !== 'undefined'
-            && typeof trim === 'undefined') {
+            && typeof whitespace === 'undefined') {
             if (text.length < min) return minError;
 
             if (text.length > max) return maxError;
@@ -101,18 +118,19 @@ const check = {
             return text;
         }
 
-        // If Trim, Min, Max
+        // If Whitespace, Min, Max
         if (
             typeof min !== 'undefined'
             && typeof max !== 'undefined'
-            && typeof trim !== 'undefined') {
+            && typeof whitespace !== 'undefined') {
             if (text.length < min) return minError;
             if (text.length > max) return maxError;
+            if (whitespace === false) {
+                const exp = /\s/g;
+                if (exp.test(text)) return whitespaceError;
 
-            const exp = /\s/g;
-            if (exp.test(text)) return trimError;
-
-            return text;
+                return text;
+            }
         }
 
         return text;

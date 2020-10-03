@@ -1,5 +1,5 @@
-const check = require('./dist/check');
-const validate = require('./dist/validate');
+const check = require('./src/check');
+const validate = require('./src/validate');
 
 module.exports = {
     check,

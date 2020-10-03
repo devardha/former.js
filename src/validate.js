@@ -5,9 +5,10 @@ const {
     emailError,
     minError,
     maxError,
-    trimError,
+    whitespaceError,
     numberError,
     booleanError,
+    imageError,
 } = errorMessage;
 
 const validate = (data, callback) => {
@@ -31,11 +32,14 @@ const validate = (data, callback) => {
     if (values.includes(numberError)) {
         return callback(numberError);
     }
-    if (values.includes(trimError)) {
-        return callback(trimError);
+    if (values.includes(whitespaceError)) {
+        return callback(whitespaceError);
     }
     if (values.includes(booleanError)) {
         return callback(booleanError);
+    }
+    if (values.includes(imageError)) {
+        return callback(imageError);
     }
     return callback(null, data);
 };
