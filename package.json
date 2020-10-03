@@ -1,6 +1,6 @@
 {
   "name": "@devardha/former.js",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A simple, flexible, and easy-to-use form validator for javascript",
   "main": "index.js",
   "scripts": {
