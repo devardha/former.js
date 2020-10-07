@@ -73,11 +73,6 @@ former.js support custom error message for form validation using `former.errorHa
 
 ```js
 former.errorHandler(err, [errorMessage]);
-
-// Example
-const email = former.check.string('test@email.com', { type: 'email' }
-former.errorHandler(email, { emailError: 'Email address is invalid!' })
-// => Email address isinvalid!
 ```
 
 - **err**
@@ -87,6 +82,14 @@ former.errorHandler(email, { emailError: 'Email address is invalid!' })
 - **errorMessage** (optional)
   - Type: `Object`
   - Custom error message
+
+Simple example
+
+```js
+const email = former.check.string('invalidemail@email', { type: 'email' }
+former.errorHandler(email, { emailError: 'Email address is invalid!' })
+// => Email address is invalid!
+```
 
 #### Default error message
 `former.errorHandler()` return the devault error message by default if you don't specify the custom error message.
@@ -131,8 +134,8 @@ former.validate(formData, function (err, data) {
         // do something with your data here
     }
 
-    console.log(formerjs.errorHandler(err, { minError: 'Too short bro!' }));
-    // => Too short bro!
+    // Handling errors
+    console.log(formerjs.errorHandler(err, { minError: 'Too short bro!', whitespaceError: 'Opps, your username contain spaces' }));
 })
 ```
 
