@@ -1,5 +1,5 @@
 # FORMER.JS Form Validator
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/devardha/former.js/issues) ![npm (scoped)](https://img.shields.io/npm/v/@devardha/former.js)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/devardha/former.js/issues) ![npm (scoped)](https://img.shields.io/npm/v/@devardha/former.js) ![npm](https://img.shields.io/npm/dw/@devardha/former.js)
 
 Former.js is a simple, flexible, and easy-to-use form validator for javascript.
 
@@ -68,19 +68,54 @@ former.validate([formObject], [callback])
   - Type: `Function`
   - A callback to be fired once the data has been validated.
 
-## Example
+### Custom error message
+former.js support custom error message for form validation using `former.errorHandler()`.
 
+```js
+former.errorHandler(err, [errorMessage]);
+
+// Example
+const email = former.check.string('test@email.com', { type: 'email' }
+former.errorHandler(email, { emailError: 'Email address is invalid!' })
+// => Email address isinvalid!
+```
+
+- **err**
+  - Type: `String`
+  - Error data
+
+- **errorMessage** (optional)
+  - Type: `Object`
+  - Custom error message
+
+#### Default error message
+`former.errorHandler()` return the devault error message by default if you don't specify the custom error message.
+
+* `emailError`: Email is invalid
+* `stringError`: Input is not a string
+* `maxError`: Input is too long
+* `minError`: Input is too short
+* `whitespaceError`: Input can't contain spaces
+* `numberError`: Input is not a number
+* `booleanError`: Input is not a boolean
+* `imageError`: Invalid image or unsupported image format
+
+
+## Example
+### Simple input validation
 ```js
 const former = require('@devardha/former.js');
 
 const validEmail = former.check.string('test@email.com', { type: 'email' });
-console.log(validEmail) // it will return the email
+console.log(validEmail)
+// => test@email.com
 
 const invalidEmail = former.check.string('invalidemail', { type: 'email' });
-console.log(invalidEmail) // it will return a string of invalid email code (EMAIL_ERROR)
+console.log(invalidEmail)
+// => EMAIL_ERROR
 ```
 
-Full form validation example
+### Full form validation
 ```js
 const former = require('@devardha/former.js');
 
@@ -96,7 +131,8 @@ former.validate(formData, function (err, data) {
         // do something with your data here
     }
 
-    console.log(err) // catch validation errors
+    console.log(formerjs.errorHandler(err, { minError: 'Too short bro!' }));
+    // => Too short bro!
 })
 ```
 
